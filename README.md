@@ -1,8 +1,12 @@
 # COMP308 - Group 2
 Chaggar, Alley
+
 Khaleel, Ali
+
 Occhiuzzi, Brandon
+
 Stroud, Shane
+
 Wang, Ming Jie
 
 ## Description
