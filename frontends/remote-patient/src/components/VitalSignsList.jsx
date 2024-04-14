@@ -14,17 +14,18 @@ const VitalSignsList = ({ setInitialValues }) => {
       <table className="table">
         <thead>
           <tr>
+            <th>ID</th>
             <th>Info</th>
             <th>Temperature</th>
             <th>Heart Rate</th>
             <th>Blood Pressure</th>
             <th>Respiratory Rate</th>
-            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {data.getVitalSigns.map((vitalSign) => (
             <tr key={vitalSign.id}>
+              <td>{vitalSign.id}</td>
               <td>{vitalSign.info}</td>
               <td>{vitalSign.temperature}</td>
               <td>{vitalSign.heartRate}</td>
