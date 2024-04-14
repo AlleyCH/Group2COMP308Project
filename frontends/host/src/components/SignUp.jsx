@@ -1,24 +1,29 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'; 
 import { useMutation } from '@apollo/client';
-import { LOGIN_MUTATION } from '../graphql/Mutations';
+import { SIGN_UP_MUTATION } from '../graphql/Mutations';
 
-function Login() {
+function SignUp() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+  const [userType, setUserType] = useState('patient'); 
+  const navigate = useNavigate(); 
 
-  const [login, { loading, error }] = useMutation(LOGIN_MUTATION, {
-    variables: { username, password },
+  const [signUp, { loading, error }] = useMutation(SIGN_UP_MUTATION, {
+    variables: {
+      username,
+      password,
+      userType, 
+    },
     onCompleted: (data) => {
-      localStorage.setItem('token', data.login.token);
-      window.location.href = 'http://localhost:5171'; // Redirect to vital signs micro-frontend
+      console.log('Signup successful', data);
+      navigate('/login'); // Navigate to login page after successful signup
     },
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    login();
+    signUp();
   };
 
   return (
@@ -27,7 +32,7 @@ function Login() {
         <div className="col-12 col-md-8 col-lg-6 col-xl-4">
           <div className="card shadow">
             <div className="card-body p-4">
-              <h2 className="text-center mb-4">Login</h2>
+              <h2 className="text-center mb-4">Sign Up</h2>
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <input
@@ -49,17 +54,27 @@ function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
+                <div className="mb-3">
+                  <select 
+                    className="form-control"
+                    value={userType}
+                    onChange={(e) => setUserType(e.target.value)}
+                    required>
+                    <option value="patient">Patient</option>
+                    <option value="nurse">Nurse</option>
+                  </select>
+                </div>
                 <button type="submit" className="btn btn-primary w-100" disabled={loading}>
-                  Login
+                  Sign Up
                 </button>
                 {error && (
                   <div className="alert alert-danger mt-3" role="alert">
-                    Error logging in: {error.message}
+                    Error signing up: {error.message}
                   </div>
                 )}
               </form>
               <div className="mt-3 text-center">
-                <Link to="/signup">Don't have an account? Sign Up</Link>
+                <Link to="/login">Already have an account? Login</Link>
               </div>
             </div>
           </div>
@@ -69,4 +84,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default SignUp;

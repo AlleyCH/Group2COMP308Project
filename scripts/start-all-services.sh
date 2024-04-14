@@ -6,8 +6,12 @@ cd ../services/auth-microservice && npm start &
 cd ../services/vital-signs-microservice && npm start &
 
 echo "Starting frontends..."
-cd ../frontends/auth-micro-frontend && npm run dev &
-cd ../frontends/vital-signs-micro-frontend && npm run dev &
+cd ../frontends/host && npm run dev &
+cd ../frontends/remote-nurse && npm run dev &
+cd ../frontends/remote-patient && npm run dev &
+
+echo "Starting gateway..."
+cd ../gateway/gateway && npm start &
 
 # Wait for any process to exit
 wait

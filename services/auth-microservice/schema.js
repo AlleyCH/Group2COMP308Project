@@ -15,6 +15,7 @@ const UserType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLID },
     username: { type: GraphQLString },
+    userType: { type: GraphQLString },
     token: { type: GraphQLString }
   })
 });
@@ -41,24 +42,27 @@ const RootMutation = new GraphQLObjectType({
       args: {
         username: { type: GraphQLString },
         password: { type: GraphQLString },
+        userType: { type: GraphQLString }
       },
       async resolve(parent, args) {
         const userExists = await User.findOne({ username: args.username });
         if (userExists) {
           throw new Error('Username already taken');
         }
-
+    
+        const hashedPassword = await bcrypt.hash(args.password, 12);
         const user = new User({
           username: args.username,
-          password: args.password,
+          password: hashedPassword,
+          userType: args.userType || 'patient'
         });
-
+    
         await user.save();
-
+    
         const token = jwt.sign({ userId: user.id }, process.env.SECRET_KEY, {
           expiresIn: '1h',
         });
-
+    
         return { ...user._doc, id: user.id, token };
       },
     },
