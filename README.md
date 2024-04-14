@@ -1,4 +1,5 @@
 # COMP308 - Group 2
+
 Chaggar, Alley
 
 Khaleel, Ali
@@ -10,6 +11,7 @@ Stroud, Shane
 Wang, Ming Jie
 
 ## Description
+
 An application to help nurse practitioners to monitor patients during the first weeks of their release from the hospital and also help the patients to monitor their daily activities.
 
 ## Getting Started
@@ -34,10 +36,21 @@ npm run dev     # Runs the front end in the development mode
 ```
 
 ### Back End Setup
+
 To set up the back end, run the following commands in each micro-backend directory of your project:
+
 ```
 npm install       # Installs dependencies
 npm start         # Runs the app in the production mode
 # or
 node index.js     # Alternatively, run the app using Node.js directly
+```
+
+### Additionally
+
+You can start all the services at once using the following commands:
+
+```
+cd scripts
+./start-all-services.sh
 ```
