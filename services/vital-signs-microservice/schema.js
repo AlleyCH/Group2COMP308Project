@@ -12,7 +12,8 @@ const VitalSignsType = new GraphQLObjectType({
     heartRate: { type: GraphQLFloat },
     bloodPressure: { type: GraphQLString },
     respiratoryRate: { type: GraphQLFloat },
-    createdAt: { type: GraphQLString }
+    createdAt: { type: GraphQLString },
+    info: { type: GraphQLString }
   })
 });
 
@@ -86,6 +87,7 @@ const Mutation = new GraphQLObjectType({
         heartRate: { type: new GraphQLNonNull(GraphQLFloat) },
         bloodPressure: { type: new GraphQLNonNull(GraphQLString) },
         respiratoryRate: { type: new GraphQLNonNull(GraphQLFloat) },
+        info: { type: new GraphQLNonNull(GraphQLString) },
       },
       resolve(parent, args) {
         let vitalSigns = new VitalSigns(args);
@@ -100,6 +102,7 @@ const Mutation = new GraphQLObjectType({
         heartRate: { type: GraphQLFloat },
         bloodPressure: { type: GraphQLString },
         respiratoryRate: { type: GraphQLFloat },
+        info: { type: GraphQLString },
       },
       resolve(parent, args) {
         return VitalSigns.findByIdAndUpdate(args.id, args, { new: true });

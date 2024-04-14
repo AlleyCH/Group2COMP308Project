@@ -6,7 +6,8 @@ const vitalSignsSchema = new mongoose.Schema({
   heartRate: { type: Number, required: true },
   bloodPressure: { type: String, required: true },
   respiratoryRate: { type: Number, required: true },
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
+  info: {type: String, required: true}
 });
 
 module.exports = mongoose.model('VitalSigns', vitalSignsSchema);

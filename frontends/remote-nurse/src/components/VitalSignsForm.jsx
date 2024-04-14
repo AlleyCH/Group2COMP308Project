@@ -9,13 +9,14 @@ const VitalSignsForm = ({ initialValues, refetch, resetInitialValues }) => {
     heartRate: '',
     bloodPressure: '',
     respiratoryRate: '',
+    info: 'Nurse',
   });
 
   useEffect(() => {
     if (initialValues) {
       setFormState({ ...initialValues });
     } else {
-      setFormState({ temperature: '', heartRate: '', bloodPressure: '', respiratoryRate: '' });
+      setFormState({ temperature: '', heartRate: '', bloodPressure: '', respiratoryRate: '', info: 'Nurse'});
     }
   }, [initialValues]);
 
@@ -35,7 +36,7 @@ const VitalSignsForm = ({ initialValues, refetch, resetInitialValues }) => {
 
   const resetForm = () => {
     // Clear form fields
-    setFormState({ temperature: '', heartRate: '', bloodPressure: '', respiratoryRate: '' });
+    setFormState({ temperature: '', heartRate: '', bloodPressure: '', respiratoryRate: '', info:'Nurse'});
     if (resetInitialValues) resetInitialValues();
   };
 
@@ -46,6 +47,7 @@ const VitalSignsForm = ({ initialValues, refetch, resetInitialValues }) => {
       heartRate: parseFloat(formState.heartRate),
       bloodPressure: formState.bloodPressure,
       respiratoryRate: parseFloat(formState.respiratoryRate),
+      info: 'Nurse',
     };
 
     if (initialValues) {
@@ -103,6 +105,9 @@ const VitalSignsForm = ({ initialValues, refetch, resetInitialValues }) => {
           onChange={(e) => setFormState({ ...formState, [e.target.name]: e.target.value })}
         />
       </div>
+
+
+
       {/* Submit button */}
       <button type="submit" className="btn btn-primary">
         {initialValues ? 'Update' : 'Add'}

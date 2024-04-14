@@ -14,6 +14,7 @@ const VitalSignsList = ({ setInitialValues }) => {
       <table className="table">
         <thead>
           <tr>
+            <th>Info</th>
             <th>Temperature</th>
             <th>Heart Rate</th>
             <th>Blood Pressure</th>
@@ -24,6 +25,7 @@ const VitalSignsList = ({ setInitialValues }) => {
         <tbody>
           {data.getVitalSigns.map((vitalSign) => (
             <tr key={vitalSign.id}>
+              <td>{vitalSign.info}</td>
               <td>{vitalSign.temperature}</td>
               <td>{vitalSign.heartRate}</td>
               <td>{vitalSign.bloodPressure}</td>
